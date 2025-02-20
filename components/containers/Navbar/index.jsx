@@ -136,27 +136,39 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
                   {isDropdownOpen && (
                     <div
                       id="categoriesDropdown"
-                      className="absolute left-0 top-full bg-white text-black shadow-xl rounded-md z-50 p-2 w-[300px] grid grid-cols-1"
+                      className="absolute left-1/2 -translate-x-1/2 top-[calc(30%+1rem)] bg-white/95 backdrop-blur-md 
+                        text-black shadow-2xl rounded-2xl z-50 p-6 w-[500px] grid grid-cols-2 gap-4 
+                        border border-gray-100 transform transition-all duration-300 animate-fadeIn"
                     >
                       {categories.map((category, index) => (
                         <Link
                           key={index}
                           href={`/${sanitizeUrl(category.title)}`}
-                          className="border-b last:border-none"
+                          className="group relative overflow-hidden rounded-xl"
                           title={category.title}
                         >
-                          <div className="flex items-center gap-4 hover:bg-theme p-2 transition">
-                            <Image
-                              src={`${imagePath}/${category.image}`}
-                              alt={category.title}
-                              title={category.title}
-                              width={60}
-                              height={100}
-                              className="rounded-md h-14"
-                            />
-                            <span className="font-medium capitalize">
-                              {category.title}
-                            </span>
+                          <div className="relative flex items-center gap-4 p-3 hover:bg-theme/5 transition-all duration-300
+                            before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-primary 
+                            before:transform before:scale-y-0 before:transition-transform before:duration-300
+                            group-hover:before:scale-y-100"
+                          >
+                            <div className="relative w-16 h-16 rounded-lg overflow-hidden">
+                              <Image
+                                src={`${imagePath}/${category.image}`}
+                                alt={category.title}
+                                title={category.title}
+                                fill
+                                className="object-cover transform group-hover:scale-110 transition-transform duration-300"
+                              />
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="font-medium capitalize text-lg group-hover:text-primary transition-colors">
+                                {category.title}
+                              </span>
+                              <span className="text-sm text-gray-500 group-hover:text-primary/70 transition-colors">
+                                View articles →
+                              </span>
+                            </div>
                           </div>
                         </Link>
                       ))}
@@ -181,47 +193,57 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
 
               {/* Search Section */}
               <div className="flex items-center justify-end gap-3 relative search-container">
-                <div className="hidden lg:flex items-center rounded-md gap-1 relative">
+                <div className="hidden lg:flex items-center rounded-full relative">
                   <button
                     onClick={toggleSearch}
-                    className="p-2 hover:text-primary transition-colors"
+                    className="p-2 hover:text-primary transition-all duration-300 relative z-10"
                     aria-label="Toggle search"
                   >
-                    <Search className="w-4 h-4" aria-hidden="true" />
+                    {isSearchOpen ? (
+                      <X className="w-4 h-4 transition-transform duration-300" aria-hidden="true" />
+                    ) : (
+                      <Search className="w-4 h-4 transition-transform duration-300" aria-hidden="true" />
+                    )}
                   </button>
-                  {isSearchOpen && (
-                    <div className="absolute right-0 top-full mt-2 w-60 z-50">
-                      <input
-                        ref={searchInputRef}
-                        type="text"
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                        placeholder="Search..."
-                        className="w-full p-2 border rounded-md focus:outline-none focus:border-primary transition-all shadow-lg bg-white"
-                        aria-label="Search input"
-                      />
-                    </div>
-                  )}
+                  
+                  <div className={`absolute right-0 top-1/2 -translate-y-1/2 transition-all duration-300 
+                    ${isSearchOpen ? 'w-64 opacity-100 visible' : 'w-0 opacity-0 invisible'}`}>
+                    <input
+                      ref={searchInputRef}
+                      type="text"
+                      value={searchQuery}
+                      onChange={handleSearchChange}
+                      placeholder="Type to search..."
+                      className="w-full pl-8 pr-4 py-2 bg-white/90 backdrop-blur-sm border-2 border-primary/20 
+                        rounded-full focus:outline-none focus:border-primary/50 shadow-lg transition-all"
+                      aria-label="Search input"
+                    />
+                    <Search className="w-4 h-4 absolute left-2 top-1/2 -translate-y-1/2 text-gray-400" />
+                  </div>
                 </div>
 
                 {searchQuery && (
-                  <div className="absolute right-0 top-[calc(100%+2.5rem)] bg-white shadow-2xl rounded-md mt-1 z-40 w-[300px]">
+                  <div className="absolute right-0 top-[calc(100%+1rem)] bg-white/95 backdrop-blur-sm 
+                    shadow-lg rounded-xl mt-1 z-40 w-[300px] border border-gray-100 overflow-hidden">
                     {filteredBlogs.length > 0 ? (
                       filteredBlogs.map((item, index) => (
                         <Link
                           key={index}
-                          href={`/${sanitizeUrl(
-                            item.article_category
-                          )}/${sanitizeUrl(item?.title)}`}
+                          href={`/${sanitizeUrl(item.article_category)}/${sanitizeUrl(item?.title)}`}
                           title={item.title}
                         >
-                          <div className="p-2 hover:bg-gray-200 border-b text-gray-600">
-                            {item.title}
+                          <div className="p-3 hover:bg-gray-50 border-b border-gray-100 transition-colors">
+                            <div className="flex items-center gap-2">
+                              <Search className="w-3 h-3 text-primary/60" />
+                              <span className="text-gray-700 text-sm">{item.title}</span>
+                            </div>
                           </div>
                         </Link>
                       ))
                     ) : (
-                      <div className="p-2 text-gray-500">No results found</div>
+                      <div className="p-4 text-gray-500 text-center text-sm">
+                        No results found for &ldquo;{searchQuery}&rdquo;
+                      </div>
                     )}
                   </div>
                 )}
@@ -275,6 +297,23 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
           .sidebar {
             width: 100%;
           }
+        }
+      `}</style>
+
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translate(-50%, 10px);
+          }
+          to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+          }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
         }
       `}</style>
     </>
