@@ -90,7 +90,7 @@ export default function Rightbar({
         {lastFourBlogs.map((item, index) => (
           <Link
             key={index}
-            href={`/${sanitizeUrl(item.article_category)}/${sanitizeUrl(
+            href={`${sanitizeUrl(
               item?.title
             )}`}
             className="flex items-center gap-4 group p-2 transition-all"

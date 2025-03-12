@@ -37,20 +37,20 @@ export default function Categories({
   contact_details,
 }) {
   const router = useRouter();
-  const { category } = router.query;
+  const { categoryPage } = router.query;
 
   const breadcrumbs = useBreadcrumbs();
 
   const filteredBlogList = blog_list.filter((item) => {
-    const searchContent = sanitizeUrl(category);
+    const searchContent = sanitizeUrl(categoryPage);
     return sanitizeUrl(item.article_category) === searchContent;
   });
 
   useEffect(() => {
     const currentPath = router.asPath;
 
-    if (category && (category.includes("%20") || category.includes(" "))) {
-      const newCategory = category.replace(/%20/g, "-").replace(/ /g, "-");
+    if (categoryPage && (categoryPage.includes("%20") || categoryPage.includes(" "))) {
+      const newCategory = categoryPage.replace(/%20/g, "-").replace(/ /g, "-");
       router.replace(`/${newCategory}`);
     }
 
@@ -60,7 +60,7 @@ export default function Categories({
     if (currentPath.includes("about-us")) {
       router.replace("/about");
     }
-  }, [category, router]);
+  }, [categoryPage, router]);
 
   return (
     page?.enable && (
@@ -70,7 +70,7 @@ export default function Categories({
           <title>
             {meta?.title?.replaceAll(
               "##category##",
-              category
+              categoryPage
                 ?.replaceAll("-", " ")
                 .split(" ")
                 .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -81,7 +81,7 @@ export default function Categories({
             name="description"
             content={meta?.description.replaceAll(
               "##category##",
-              category?.replaceAll("-", " ")
+              categoryPage?.replaceAll("-", " ")
             )}
           />
           <link rel="author" href={`http://${domain}`} />
@@ -92,7 +92,7 @@ export default function Categories({
         </Head>
 
         <Navbar
-          category={category}
+          categoryPage={categoryPage}
           blog_list={blog_list}
           categories={categories}
           logo={logo}
@@ -105,11 +105,11 @@ export default function Categories({
           <div className="  text-start bg-gray-100 w-full py-14 mb-8   ">
             <div className=" mx-auto max-w-[1200px] ">
               <h1 className="text-4xl font-semibold capitalize pb-8 pt-5 w-full">
-                Exploring: {category?.replace("-", " ")}
+                Exploring: {categoryPage?.replace("-", " ")}
               </h1>
               <Breadcrumbs
                 className=" gap-2  "
-                breadcrumbs={[{ label: "Home", url: "/" }, { label: category }]}
+                breadcrumbs={[{ label: "Home", url: "/" }, { label: categoryPage }]}
               />
             </div>
           </div>
@@ -120,7 +120,7 @@ export default function Categories({
                   <div key={index} className="group flex flex-col gap-4">
                     <Link
                       title={`View ${item?.title || "Article"}`}
-                      href={`/${sanitizeUrl(category)}/${sanitizeUrl(
+                      href={`/${sanitizeUrl(
                         item?.title
                       )}`}
                     >
@@ -150,7 +150,7 @@ export default function Categories({
                       <Badge className="mb-4">{item.article_category}</Badge>
                       <Link
                         title={`Read more about ${item?.title || "Article"}`}
-                        href={`/${sanitizeUrl(category)}/${sanitizeUrl(
+                        href={`/${sanitizeUrl(
                           item?.title
                         )}`}
                         className="font-bold text-3xl hover:text-primary duration-200 block"
@@ -199,15 +199,15 @@ export default function Categories({
               },
               {
                 "@type": "WebPage",
-                "@id": `https://${domain}/${category}`,
-                url: `https://${domain}/${category}`,
+                "@id": `https://${domain}/${categoryPage}`,
+                url: `https://${domain}/${categoryPage}`,
                 name: meta?.title?.replaceAll(
                   "##category##",
-                  category?.replaceAll("-", " ")
+                  categoryPage?.replaceAll("-", " ")
                 ),
                 description: meta?.description?.replaceAll(
                   "##category##",
-                  category?.replaceAll("-", " ")
+                  categoryPage?.replaceAll("-", " ")
                 ),
                 inLanguage: "en-US",
                 publisher: {
@@ -217,7 +217,7 @@ export default function Categories({
               },
               {
                 "@type": "ItemList",
-                url: `https://${domain}/${category}`,
+                url: `https://${domain}/${categoryPage}`,
                 name: "blog",
                 itemListElement: blog_list?.map((blog, index) => ({
                   "@type": "ListItem",
@@ -241,7 +241,7 @@ export default function Categories({
 
 export async function getServerSideProps({ req, query }) {
   const domain = getDomain(req?.headers?.host);
-  const { category } = query;
+  const { categoryPage } = query;
 
   let layoutPages = await callBackendApi({
     domain,
@@ -279,7 +279,7 @@ export async function getServerSideProps({ req, query }) {
 
   const categoryExists = categories?.data[0]?.value?.some(
     (cat) =>
-      cat?.title?.toLowerCase() === category?.replaceAll("-", " ").toLowerCase()
+      cat?.title?.toLowerCase() === categoryPage?.replaceAll("-", " ").toLowerCase()
   );
 
   if (!categoryExists) {

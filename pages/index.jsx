@@ -172,9 +172,7 @@ export default function Home({
                             <div className="relative h-[500px] overflow-hidden">
                               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-10"></div>
                               <Link
-                                href={`/${encodeURI(
-                                  sanitizeUrl(item.article_category)
-                                )}/${encodeURI(sanitizeUrl(item.title))}`}
+                                href={`/${encodeURI(sanitizeUrl(item.title))}`}
                                 title={item.title}
                                 className="relative block w-full h-full"
                               >
@@ -208,9 +206,7 @@ export default function Home({
                                 </div>
 
                                 <Link
-                                  href={`/${encodeURI(
-                                    sanitizeUrl(item.article_category)
-                                  )}/${encodeURI(sanitizeUrl(item.title))}`}
+                                  href={`/${encodeURI(sanitizeUrl(item.title))}`}
                                   title={item.title}
                                   className="font-bold text-3xl hover:text-primary/90 transition-colors duration-200 mb-4 block"
                                 >
@@ -238,9 +234,7 @@ export default function Home({
                                   </div>
 
                                   <Link
-                                    href={`/${encodeURI(
-                                      sanitizeUrl(item.article_category)
-                                    )}/${encodeURI(sanitizeUrl(item.title))}`}
+                                    href={`/${encodeURI(sanitizeUrl(item.title))}`}
                                     className="inline-flex items-center bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors group-hover:translate-x-1 duration-300"
                                   >
                                     Read Article
@@ -293,7 +287,7 @@ export default function Home({
                             Popular
                           </span>
                           <Link
-                            href={`/${encodeURI(sanitizeUrl(item.article_category))}/${encodeURI(sanitizeUrl(item.title))}`}
+                            href={`/${encodeURI(sanitizeUrl(item.title))}`}
                             className="block h-full"
                           >
                             <Image
@@ -324,7 +318,7 @@ export default function Home({
                           </div>
 
                           <Link
-                            href={`/${encodeURI(sanitizeUrl(item.article_category))}/${encodeURI(sanitizeUrl(item.title))}`}
+                            href={`/${encodeURI(sanitizeUrl(item.title))}`}
                             title={item.title}
                             className="text-2xl font-bold hover:text-primary duration-200 mb-3 line-clamp-2"
                           >
@@ -344,7 +338,7 @@ export default function Home({
                             </div>
                             
                             <Link
-                              href={`/${encodeURI(sanitizeUrl(item.article_category))}/${encodeURI(sanitizeUrl(item.title))}`}
+                              href={`/${encodeURI(sanitizeUrl(item.title))}`}
                               title={`Read more about ${item.title}`}
                               className="inline-flex items-center text-primary font-medium hover:underline"
                             >
@@ -368,7 +362,7 @@ export default function Home({
                     </h2>
                     <div className="w-20 h-1 bg-rose-600 mb-6"></div>
                     <p className="mt-4 text-gray-600 max-w-2xl mb-8">
-                      Essential articles that provide valuable insights and information you shouldn't miss.
+                      Essential articles that provide valuable insights and information you shouldn&apos;t miss.
                     </p>
                   </div>
 
@@ -381,7 +375,7 @@ export default function Home({
                           {/* Image Section */}
                           <div className="relative">
                             <Link
-                              href={`/${encodeURI(sanitizeUrl(item.article_category))}/${encodeURI(sanitizeUrl(item.title))}`}
+                              href={`/${encodeURI(sanitizeUrl(item.title))}`}
                               title={item.title}
                               className="block relative h-56 overflow-hidden"
                             >
@@ -408,7 +402,7 @@ export default function Home({
                             {index === 0 && (
                               <div className="absolute top-4 right-4 z-20">
                                 <span className="bg-rose-600 text-white text-xs uppercase py-1 px-3 rounded-full font-medium">
-                                  Editor's Choice
+                                  Editor&apos;s Choice
                                 </span>
                               </div>
                             )}
@@ -417,7 +411,7 @@ export default function Home({
                           {/* Content Section */}
                           <div className="p-6 flex-grow flex flex-col">
                             <Link
-                              href={`/${encodeURI(sanitizeUrl(item.article_category))}/${encodeURI(sanitizeUrl(item.title))}`}
+                              href={`/${encodeURI(sanitizeUrl(item.title))}`}
                               title={item.title}
                               className="block text-xl font-bold hover:text-primary duration-200 mb-3 line-clamp-2"
                             >
@@ -437,7 +431,7 @@ export default function Home({
                               </div>
                               
                               <Link
-                                href={`/${encodeURI(sanitizeUrl(item.article_category))}/${encodeURI(sanitizeUrl(item.title))}`}
+                                href={`/${encodeURI(sanitizeUrl(item.title))}`}
                                 className="text-primary font-medium text-sm hover:underline inline-flex items-center"
                               >
                                 Read More

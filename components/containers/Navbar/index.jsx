@@ -182,7 +182,7 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
                       {categories.map((category, index) => (
                         <Link
                           key={index}
-                          href={`/${sanitizeUrl(category.title)}`}
+                          href={`/category/${sanitizeUrl(category.title)}`}
                           className="group relative overflow-hidden rounded-xl hover:shadow-md transition-all duration-300"
                           title={category.title}
                         >
@@ -200,7 +200,7 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
                               />
                             </div>
                             <div className="flex flex-col">
-                              <span className="font-medium capitalize text-lg group-hover:text-primary transition-colors">
+                            <span className="font-medium capitalize text-lg group-hover:text-primary transition-colors">
                                 {category.title}
                               </span>
                               <div className="flex items-center text-sm text-gray-500 group-hover:text-primary/70 transition-colors mt-1">
@@ -461,7 +461,7 @@ const SidebarLinks = ({
           {categories.map((category, index) => (
             <Link
               key={index}
-              href={`/${sanitizeUrl(category.title)}`}
+              href={`/category/${sanitizeUrl(category.title)}`}
               title={category.title}
             >
               <div className="flex items-center gap-3 hover:bg-white/10 p-3 rounded-lg transition-all duration-300 group">
