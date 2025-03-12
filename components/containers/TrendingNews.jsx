@@ -1,134 +1,114 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import Container from "../common/Container";
-import FullContainer from "../common/FullContainer";
+import Link from "next/link";
 import { sanitizeUrl } from "@/lib/myFun";
 
 export default function TrendingNews({ blog_list = [], imagePath }) {
-  const mustReadBlogs = blog_list.filter((item) => item.isMustRead).slice(0, 3);
+  const trendingBlogs = blog_list.filter((item) => item.trendingNews);
+
   return (
-    mustReadBlogs?.length > 0 && (
-      <FullContainer className="py-24">
-        <Container className=" mx-auto max-w-[1200px]  ">
-          <div className="pt-5 text-center w-full flex flex-col items-center text-black">
-            <div className="  w-fit border-b-8 border-primary/45  " >
+    <section className="py-12 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="mb-10 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            Trending News
+          </h2>
+          <div className="w-20 h-1 bg-rose-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+            Stay updated with the latest insights and news from the automotive
+            industry
+          </p>
+        </div>
 
-            <h2 className=" text-4xl font-bold -mb-3 ">
-              Trending Posts
-            </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full mt-16">
-              <div className="grid grid-cols-1 gap-8">
-                {mustReadBlogs.slice(0, 2).map((item, index) => (
-                  <SimpleBlogCard
-                    key={item.id || index}
-                    title={item.title}
-                    author={item.author}
-                    date={item.published_at}
-                    tagline={item.tagline}
-                    href={`/${sanitizeUrl(item.article_category)}/${sanitizeUrl(
-                      item?.title
-                    )}`}
-                    category={item.article_category}
-                  />
-                ))}
-              </div>
-              {mustReadBlogs[2] && (
-                <div>
-                  <FeaturedBlogCard
-                    title={mustReadBlogs[2].title}
-                    altTitle={mustReadBlogs[2].imageTitle}
-                    author={mustReadBlogs[2].author}
-                    date={mustReadBlogs[2].published_at}
-                    image={`${imagePath}/${
-                      mustReadBlogs[2].image || "no-image.png"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Featured Article (Larger) */}
+          {trendingBlogs.length > 0 && (
+            <div className="lg:col-span-2 lg:row-span-2 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 h-full">
+              <Link
+                href={`/${sanitizeUrl(trendingBlogs[0]?.title)}`}
+                className="block h-full"
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={`${imagePath}/${
+                      trendingBlogs[0].image || "no-image.png"
                     }`}
-                    href={`/${sanitizeUrl(
-                      mustReadBlogs[2].article_category
-                    )}/${sanitizeUrl(mustReadBlogs[2]?.title)}`}
-                    category={mustReadBlogs[2].article_category}
-                    imageTitle={mustReadBlogs[2].imageTitle}
-                    altImage={mustReadBlogs[2].altImage}
+                    alt={trendingBlogs[0].imageAltText}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority
+                    className="object-cover w-full h-full"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 p-6 text-white">
+                    <span className="bg-rose-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3 inline-block">
+                      {trendingBlogs[0].article_category}
+                    </span>
+                    <h3 className="text-2xl font-bold mb-2">
+                      {trendingBlogs[0].title}
+                    </h3>
+                    <p className="text-sm text-gray-200 mb-2">
+                      {trendingBlogs[0].tagline}
+                    </p>
+                    <div className="flex items-center mt-3">
+                      <span className="text-xs">
+                        {new Date(
+                          trendingBlogs[0].published_at
+                        ).toLocaleDateString()}
+                      </span>
+                      <span className="mx-2">•</span>
+                      <span className="text-xs">
+                        By {trendingBlogs[0].author}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              )}
+              </Link>
             </div>
-          </div>
-        </Container>
-      </FullContainer>
-    )
-  );
-}
+          )}
 
-function SimpleBlogCard({ title, href, category, tagline, date, author }) {
-  return (
-    <div className="flex flex-col gap-4 bg-white p-6 rounded-lg">
-      <p className="text-start text-lg capitalize text-primary  duration-200">
-        {category}
-      </p>
-
-      <Link
-        title={title}
-        href={href || ""}
-        className="font-medium text-left leading-2 text-2xl hover:text-primary duration-200"
-      >
-        {title}
-      </Link>
-
-      <div className="flex gap-4 ">
-        <p className="text-start text-gray-400 text-normal">{author}</p>
-        <span>.</span>
-        <p className="text-start text-gray-400 text-normal">{date}</p>
-      </div>
-      <p className="text-start text-gray-600">{tagline}</p>
-    </div>
-  );
-}
-
-function FeaturedBlogCard({
-  title,
-  image,
-  href,
-  category,
-  imageTitle,
-  altImage,
-  date,
-  author,
-}) {
-  return (
-    <div className="relative h-full min-h-[400px] group">
-      <Link
-        href={href || "#"}
-        title={imageTitle}
-        className="absolute inset-0 w-full h-full  hover:scale-100 "
-      >
-        <Image
-          src={image}
-          title={imageTitle}
-          alt={altImage}
-          fill
-          priority={false}
-          className="object-cover brightness-50 hover:scale-100 "
-        />
-      </Link>
-
-      <div className="relative h-full flex flex-col justify-center items-center text-white p-6 gap-4">
-        <p className="text-lg capitalize text-primary duration-200">
-          {category}
-        </p>
-
-        <h3 className="font-medium text-center text-3xl  duration-200">
-          <Link href={href || ""}>{title}</Link>
-        </h3>
-
-        <div className="flex gap-4 ">
-          <p className="text-start text-gray-300 text-normal">{author}</p>
-          <span>.</span>
-          <p className="text-start text-gray-300 text-normal">{date}</p>
+          {/* Regular Articles */}
+          {trendingBlogs.slice(1).map((blog, index) => (
+            <div
+              key={blog._id}
+              className="rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:-translate-y-1"
+            >
+              <Link href={`/${sanitizeUrl(blog?.title)}`}>
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={`${imagePath}/${blog.image || "no-image.png"}`}
+                    alt={blog.imageAltText}
+                    layout="fill"
+                    objectFit="cover"
+                    className="transition-transform duration-500 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-rose-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      {blog.article_category}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-bold mb-2 line-clamp-2">
+                    {blog.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 mb-3 line-clamp-2">
+                    {blog.tagline}
+                  </p>
+                  <div className="flex items-center text-xs text-gray-500">
+                    <span>
+                      {new Date(blog.published_at).toLocaleDateString()}
+                    </span>
+                    <span className="mx-2">•</span>
+                    <span>By {blog.author}</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -3,7 +3,7 @@ import Logo from "./Logo";
 import Link from "next/link";
 import Image from "next/image";
 import { sanitizeUrl } from "@/lib/myFun";
-import { Menu, Search, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import Container from "@/components/common/Container";
 import FullContainer from "@/components/common/FullContainer";
 
@@ -16,12 +16,19 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isInBannerArea, setIsInBannerArea] = useState(true);
 
   const lastThreeBlogs = blog_list.slice(-3);
 
   // Add scroll event listener
   useEffect(() => {
     const handleScroll = () => {
+      // Get banner height (adjust this value based on your actual banner height)
+      const bannerHeight = 600; // Approximate height of banner
+
+      // Check if we're still in the banner area
+      setIsInBannerArea(window.scrollY < bannerHeight);
+      // Also track general scrolling for other effects
       setIsScrolled(window.scrollY > 0);
     };
 
@@ -107,16 +114,23 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
   return (
     <>
       <FullContainer
-        className={`${
-          isScrolled ? "bg-white" : "bg-theme"
-        } text-black sticky top-0 z-20 transition-colors duration-300`}
+        className={`
+          fixed top-0 w-full z-20 transition-all duration-300
+          ${isScrolled ? "shadow-md" : ""}
+          ${
+            isInBannerArea
+              ? "bg-transparent text-gray-900"
+              : "bg-white text-black"
+          }
+        `}
       >
-          <div className="flex items-center justify-between gap-3 mx-auto py-5 w-full lg:px-20 ">
-            <div className="flex items-start ">
+        <Container>
+          <div className="flex items-center justify-between gap-3 mx-auto py-2.5 w-full">
+            <div className="flex items-start">
               <Logo logo={logo} imagePath={imagePath} />
             </div>
-            <div className=" flex ">
-              <nav className="hidden lg:flex items-center gap-5 uppercase">
+            <div className="flex">
+              <nav className="hidden lg:flex items-center gap-5 uppercase text-sm mr-3">
                 <Link href="/" title="Home" className="hover:text-primary">
                   Home
                 </Link>
@@ -126,33 +140,57 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
                   onMouseLeave={() => setIsDropdownOpen(false)}
                 >
                   <button
-                    className="hover:text-primary uppercase"
+                    className="hover:text-primary uppercase text-sm flex items-center gap-1"
                     aria-expanded={isDropdownOpen}
                     aria-controls="categoriesDropdown"
                   >
                     Categories
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className={`transition-transform duration-300 ${
+                        isDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
                   </button>
 
                   {isDropdownOpen && (
                     <div
                       id="categoriesDropdown"
                       className="absolute left-1/2 -translate-x-1/2 top-[calc(30%+1rem)] bg-white/95 backdrop-blur-md 
-                        text-black shadow-2xl rounded-2xl z-50 p-6 w-[500px] grid grid-cols-2 gap-4 
+                        text-black shadow-2xl rounded-2xl z-50 p-6 w-[500px] grid grid-cols-2
                         border border-gray-100 transform transition-all duration-300 animate-fadeIn"
                     >
+                      <div className="col-span-2 mb-2 pb-2 border-b border-gray-100">
+                        <h3 className="text-lg font-medium text-primary">
+                          Browse Categories
+                        </h3>
+                        <p className="text-sm text-gray-500">
+                          Explore our content by topic
+                        </p>
+                      </div>
+
                       {categories.map((category, index) => (
                         <Link
                           key={index}
                           href={`/${sanitizeUrl(category.title)}`}
-                          className="group relative overflow-hidden rounded-xl"
+                          className="group relative overflow-hidden rounded-xl hover:shadow-md transition-all duration-300"
                           title={category.title}
                         >
-                          <div className="relative flex items-center gap-4 p-3 hover:bg-theme/5 transition-all duration-300
-                            before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-primary 
-                            before:transform before:scale-y-0 before:transition-transform before:duration-300
-                            group-hover:before:scale-y-100"
+                          <div
+                            className="relative flex items-center gap-4 p-4 hover:bg-primary/5 transition-all duration-300
+                            border border-transparent hover:border-primary/10 rounded-xl"
                           >
-                            <div className="relative w-16 h-16 rounded-lg overflow-hidden">
+                            <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-primary/20 shadow-sm flex-shrink-0">
                               <Image
                                 src={`${imagePath}/${category.image}`}
                                 alt={category.title}
@@ -165,13 +203,53 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
                               <span className="font-medium capitalize text-lg group-hover:text-primary transition-colors">
                                 {category.title}
                               </span>
-                              <span className="text-sm text-gray-500 group-hover:text-primary/70 transition-colors">
-                                View articles →
-                              </span>
+                              <div className="flex items-center text-sm text-gray-500 group-hover:text-primary/70 transition-colors mt-1">
+                                <span className="inline-block mr-2 text-xs">
+                                  Explore
+                                </span>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="14"
+                                  height="14"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  className="transform group-hover:translate-x-1 transition-transform duration-300"
+                                >
+                                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                                  <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                              </div>
                             </div>
                           </div>
                         </Link>
                       ))}
+
+                      <div className="col-span-2 mt-2 pt-2 border-t border-gray-100 text-center">
+                        <Link
+                          href="/categories"
+                          className="inline-flex items-center gap-1 text-primary hover:text-primary/80 font-medium"
+                        >
+                          View all categories
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                          </svg>
+                        </Link>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -200,14 +278,26 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
                     aria-label="Toggle search"
                   >
                     {isSearchOpen ? (
-                      <X className="w-4 h-4 transition-transform duration-300" aria-hidden="true" />
+                      <X
+                        className="w-4 h-4 transition-transform duration-300"
+                        aria-hidden="true"
+                      />
                     ) : (
-                      <Search className="w-4 h-4 transition-transform duration-300" aria-hidden="true" />
+                      <Search
+                        className="w-4 h-4 transition-transform duration-300"
+                        aria-hidden="true"
+                      />
                     )}
                   </button>
-                  
-                  <div className={`absolute right-0 top-1/2 -translate-y-1/2 transition-all duration-300 
-                    ${isSearchOpen ? 'w-64 opacity-100 visible' : 'w-0 opacity-0 invisible'}`}>
+
+                  <div
+                    className={`absolute right-0 top-1/2 -translate-y-1/2 transition-all duration-300 
+                    ${
+                      isSearchOpen
+                        ? "w-64 opacity-100 visible"
+                        : "w-0 opacity-0 invisible"
+                    }`}
+                  >
                     <input
                       ref={searchInputRef}
                       type="text"
@@ -223,19 +313,25 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
                 </div>
 
                 {searchQuery && (
-                  <div className="absolute right-0 top-[calc(100%+1rem)] bg-white/95 backdrop-blur-sm 
-                    shadow-lg rounded-xl mt-1 z-40 w-[300px] border border-gray-100 overflow-hidden">
+                  <div
+                    className="absolute right-0 top-[calc(100%+1rem)] bg-white/95 backdrop-blur-sm 
+                    shadow-lg rounded-xl z-40 w-[300px] border border-gray-100 overflow-hidden"
+                  >
                     {filteredBlogs.length > 0 ? (
                       filteredBlogs.map((item, index) => (
                         <Link
                           key={index}
-                          href={`/${sanitizeUrl(item.article_category)}/${sanitizeUrl(item?.title)}`}
+                          href={`/${sanitizeUrl(
+                            item.article_category
+                          )}/${sanitizeUrl(item?.title)}`}
                           title={item.title}
                         >
                           <div className="p-3 hover:bg-gray-50 border-b border-gray-100 transition-colors">
                             <div className="flex items-center gap-2">
                               <Search className="w-3 h-3 text-primary/60" />
-                              <span className="text-gray-700 text-sm">{item.title}</span>
+                              <span className="text-gray-700 text-sm">
+                                {item.title}
+                              </span>
                             </div>
                           </div>
                         </Link>
@@ -250,6 +346,7 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
               </div>
             </div>
           </div>
+        </Container>
       </FullContainer>
 
       {/* Sidebar for Mobile */}
@@ -284,6 +381,7 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
           isDropdownOpen={isDropdownOpen}
           toggleDropdown={toggleDropdown}
           sanitizeUrl={sanitizeUrl}
+          imagePath={imagePath}
         />
       </div>
 
@@ -311,7 +409,7 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
             transform: translate(-50%, 0);
           }
         }
-        
+
         .animate-fadeIn {
           animation: fadeIn 0.3s ease-out;
         }
@@ -350,6 +448,7 @@ const SidebarLinks = ({
   isDropdownOpen,
   toggleDropdown,
   sanitizeUrl,
+  imagePath,
 }) => (
   <div className="flex lg:hidden text-2xl flex-col gap-6 mt-16">
     <Link href="/" title="Home">
@@ -357,30 +456,69 @@ const SidebarLinks = ({
     </Link>
     <div className="relative">
       <button
-        className="cursor-pointer"
+        className="cursor-pointer flex items-center gap-2"
         onClick={toggleDropdown}
         aria-expanded={isDropdownOpen}
       >
         Categories
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`transition-transform duration-300 ${
+            isDropdownOpen ? "rotate-180" : ""
+          }`}
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute left-0 top-full bg-black text-white shadow-lg rounded-md z-50 p-4 w-[300px] grid grid-cols-1 gap-4">
+        <div className="mt-4 bg-white/10 backdrop-blur-sm text-white rounded-xl z-50 p-4 grid grid-cols-1 gap-3 border border-white/20">
           {categories.map((category, index) => (
             <Link
               key={index}
               href={`/${sanitizeUrl(category.title)}`}
               title={category.title}
             >
-              <div className="flex items-center gap-4 hover:bg-gray-900 p-2 transition">
-                {/* <Image
-                  src={`${category.image}`}
-                  alt={category.title}
-                  width={60}
-                  height={100}
-                  className="rounded-md"
-                /> */}
-                <span className="font-semibold">{category.title}</span>
+              <div className="flex items-center gap-3 hover:bg-white/10 p-3 rounded-lg transition-all duration-300 group">
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center overflow-hidden">
+                  {category.image && (
+                    <Image
+                      src={`${imagePath}/${category.image}`}
+                      alt={category.title}
+                      width={40}
+                      height={40}
+                      className="object-cover rounded-full"
+                    />
+                  )}
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-medium">{category.title}</span>
+                  <span className="text-sm text-white/70 flex items-center group-hover:translate-x-1 transition-transform duration-300">
+                    View
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="ml-1"
+                    >
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </span>
+                </div>
               </div>
             </Link>
           ))}
@@ -391,8 +529,8 @@ const SidebarLinks = ({
     <Link href="/contact" title="Contact">
       Contact Us
     </Link>
-    <Link href="/about" title="About" className="uppercase text-sm mb-2">
-      About
+    <Link href="/about" title="About">
+      About Us
     </Link>
   </div>
 );

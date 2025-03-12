@@ -52,17 +52,11 @@ export default function Blog({
   const breadcrumbs = useBreadcrumbs();
 
   useEffect(() => {
-    if (
-      category.includes("%20") ||
-      category.includes(" ") ||
-      blog.includes("%20") ||
-      blog.includes(" ", "-")
-    ) {
-      const newCategory = sanitizeUrl(category);
+    if (blog.includes("%20") || blog.includes(" ", "-")) {
       const newBlog = sanitizeUrl(blog);
-      router.replace(`/${newCategory}/${newBlog}`);
+      router.replace(`/${newBlog}`);
     }
-  }, [category, router, blog]);
+  }, [router, blog]);
 
   return (
     page?.enable && (
@@ -72,10 +66,7 @@ export default function Blog({
           <title>{myblog?.value?.meta_title}</title>
           <meta name="description" content={myblog?.value?.meta_description} />
           <link rel="author" href={`https://www.${domain}`} />
-          <link
-            rel="canonical"
-            href={`https://www.${domain}/${category}/${blog}`}
-          />
+          <link rel="canonical" href={`https://www.${domain}/${blog}`} />
           <meta name="theme-color" content="#008DE5" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta
@@ -101,31 +92,10 @@ export default function Blog({
           nav_type={nav_type}
         />
 
-        <FullContainer className=" bg-gray-100 ">
-          {/* <div  className=" mx-auto max-w-[1200px] " >
-
-<h1 className="text-4xl font-semibold capitalize pb-8 pt-5 w-full">
-   {category?.replace("-", " ")}
-</h1>
-<Breadcrumbs
-className=" gap-2  "
-  breadcrumbs={breadcrumbs}
-/>
-</div> */}
-
-          <div className="  text-start bg-gray-100 w-full py-14    ">
-            <div className=" mx-auto max-w-[1200px] p-4 ">
-              <h1 className="text-4xl font-semibold capitalize pb-8 pt-5 w-full">
-                {category?.replace("-", " ")}
-              </h1>
-              <Breadcrumbs className=" gap-2  " breadcrumbs={breadcrumbs} />
-            </div>
-          </div>
-        </FullContainer>
-
-        <div>
-          <FullContainer className="overflow-hidden relative h-[50vh] flex justify-center">
-            <div className="relative h-full max-w-[1200px] w-full mt-8">
+        <FullContainer className="pt-12">
+          <Container>
+            <Breadcrumbs className="gap-2 py-6" breadcrumbs={breadcrumbs} />
+            <div className="relative h-[60vh] w-full rounded-md overflow-hidden">
               <Image
                 src={`${imagePath}/${myblog?.file_name}`}
                 alt={
@@ -140,8 +110,8 @@ className=" gap-2  "
                 className="w-full h-full object-cover"
               />
             </div>
-          </FullContainer>
-        </div>
+          </Container>
+        </FullContainer>
 
         <FullContainer className="mt-2 lg:mt-8 mb-16">
           <Container className="grid grid-cols-1 md:grid-cols-mdblogPage lg:grid-cols-blogPage gap-14 max-w-screen-xl w-full">
@@ -297,11 +267,7 @@ export async function getServerSideProps({ req, query }) {
     type: "contact_details",
   });
 
-  const categoryExists = categories?.data[0]?.value?.some(
-    (cat) => sanitizeUrl(cat?.title) === category
-  );
-
-  if (!categoryExists || !isValidBlog) {
+  if (!isValidBlog) {
     return {
       notFound: true,
     };
