@@ -298,9 +298,7 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
                       filteredBlogs.map((item, index) => (
                         <Link
                           key={index}
-                          href={`/${sanitizeUrl(
-                            item.article_category
-                          )}/${sanitizeUrl(item?.title)}`}
+                          href={`/${sanitizeUrl(item?.title)}`}
                           title={item.title}
                         >
                           <div className="p-3 hover:bg-gray-50 border-b border-gray-100 transition-colors">
