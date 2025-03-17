@@ -206,7 +206,9 @@ export default function Home({
                                 </div>
 
                                 <Link
-                                  href={`/${encodeURI(sanitizeUrl(item.title))}`}
+                                  href={`/${encodeURI(
+                                    sanitizeUrl(item.title)
+                                  )}`}
                                   title={item.title}
                                   className="font-bold text-3xl hover:text-primary/90 transition-colors duration-200 mb-4 block"
                                 >
@@ -234,7 +236,9 @@ export default function Home({
                                   </div>
 
                                   <Link
-                                    href={`/${encodeURI(sanitizeUrl(item.title))}`}
+                                    href={`/${encodeURI(
+                                      sanitizeUrl(item.title)
+                                    )}`}
                                     className="inline-flex items-center bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors group-hover:translate-x-1 duration-300"
                                   >
                                     Read Article
@@ -291,10 +295,22 @@ export default function Home({
                             className="block h-full"
                           >
                             <Image
-                              src={item.image ? `${imagePath}/${item.image}` : "/no-image.png"}
-                              alt={item.altImage || item.tagline || "Article Thumbnail"}
+                              src={
+                                item.image
+                                  ? `${imagePath}/${item.image}`
+                                  : "/no-image.png"
+                              }
+                              alt={
+                                item.altImage ||
+                                item.tagline ||
+                                "Article Thumbnail"
+                              }
                               className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
-                              title={item.imageTitle || item.title || "Blog Image Title"}
+                              title={
+                                item.imageTitle ||
+                                item.title ||
+                                "Blog Image Title"
+                              }
                               width={600}
                               height={400}
                               priority={false}
@@ -303,15 +319,26 @@ export default function Home({
                             />
                           </Link>
                         </div>
-                        
+
                         <div className="w-full md:w-3/5 p-6 md:p-8 flex flex-col">
                           <div className="flex items-center gap-3 mb-3">
                             <span className="uppercase text-xs font-semibold px-2 py-1 bg-gray-100 text-primary rounded-md">
                               {item.article_category}
                             </span>
                             <span className="text-sm text-gray-500 flex items-center">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-4 w-4 mr-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                />
                               </svg>
                               {dayjs(item?.published_at)?.format("MMM D, YYYY")}
                             </span>
@@ -324,27 +351,42 @@ export default function Home({
                           >
                             {item.title}
                           </Link>
-                          
+
                           <p className="text-gray-600 mb-4 line-clamp-3">
                             {item.tagline}
                           </p>
-                          
+
                           <div className="mt-auto flex items-center justify-between">
                             <div className="flex items-center">
                               <div className="h-9 w-9 rounded-full bg-gray-200 flex items-center justify-center mr-2">
-                                <span className="font-bold text-primary">{item.author?.charAt(0) || 'E'}</span>
+                                <span className="font-bold text-primary">
+                                  {item.author?.charAt(0) || "E"}
+                                </span>
                               </div>
-                              <span className="text-sm font-medium">{item.author}</span>
+                              <span className="text-sm font-medium">
+                                {item.author}
+                              </span>
                             </div>
-                            
+
                             <Link
                               href={`/${encodeURI(sanitizeUrl(item.title))}`}
                               title={`Read more about ${item.title}`}
                               className="inline-flex items-center text-primary font-medium hover:underline"
                             >
                               Read Article
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform duration-300"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                />
                               </svg>
                             </Link>
                           </div>
@@ -362,7 +404,8 @@ export default function Home({
                     </h2>
                     <div className="w-20 h-1 bg-rose-600 mb-6"></div>
                     <p className="mt-4 text-gray-600 max-w-2xl mb-8">
-                      Essential articles that provide valuable insights and information you shouldn&apos;t miss.
+                      Essential articles that provide valuable insights and
+                      information you shouldn&apos;t miss.
                     </p>
                   </div>
 
@@ -371,7 +414,10 @@ export default function Home({
                       ?.reverse()
                       .slice(4, 8)
                       .map((item, index) => (
-                        <div key={index} className="group rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white flex flex-col h-full">
+                        <div
+                          key={index}
+                          className="group rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white flex flex-col h-full"
+                        >
                           {/* Image Section */}
                           <div className="relative">
                             <Link
@@ -381,8 +427,16 @@ export default function Home({
                             >
                               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
                               <Image
-                                src={item.image ? `${imagePath}/${item.image}` : "/no-image.png"}
-                                alt={item.altImage || item.tagline || "Article Thumbnail"}
+                                src={
+                                  item.image
+                                    ? `${imagePath}/${item.image}`
+                                    : "/no-image.png"
+                                }
+                                alt={
+                                  item.altImage ||
+                                  item.tagline ||
+                                  "Article Thumbnail"
+                                }
                                 title={item.title || "Article Image"}
                                 className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700"
                                 width={600}
@@ -392,13 +446,13 @@ export default function Home({
                                 sizes="(max-width: 768px) 100vw, 50vw"
                               />
                             </Link>
-                            
+
                             <div className="absolute bottom-0 left-0 z-20 p-4">
                               <span className="bg-primary text-white text-xs uppercase py-1 px-3 rounded-full font-medium">
                                 {item.article_category}
                               </span>
                             </div>
-                            
+
                             {index === 0 && (
                               <div className="absolute top-4 right-4 z-20">
                                 <span className="bg-rose-600 text-white text-xs uppercase py-1 px-3 rounded-full font-medium">
@@ -421,22 +475,46 @@ export default function Home({
                             <p className="text-gray-600 text-sm mb-4 line-clamp-3">
                               {item.tagline}
                             </p>
-                            
+
                             <div className="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center">
                               <div className="text-sm text-gray-500 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-4 w-4 mr-1"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                  />
                                 </svg>
-                                {dayjs(item?.published_at)?.format("MMM D, YYYY")}
+                                {dayjs(item?.published_at)?.format(
+                                  "MMM D, YYYY"
+                                )}
                               </div>
-                              
+
                               <Link
                                 href={`/${encodeURI(sanitizeUrl(item.title))}`}
                                 className="text-primary font-medium text-sm hover:underline inline-flex items-center"
                               >
                                 Read More
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="h-3 w-3 ml-1"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M9 5l7 7-7 7"
+                                  />
                                 </svg>
                               </Link>
                             </div>

@@ -232,14 +232,14 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
                 </div>
                 <Link
                   title="Contact"
-                  href="/contact"
+                  href="/contact-us"
                   className="hover:text-primary"
                 >
                   Contact Us
                 </Link>
                 <Link
                   title="About"
-                  href="/about"
+                  href="/about-us"
                   className="hover:text-primary"
                 >
                   About Us
