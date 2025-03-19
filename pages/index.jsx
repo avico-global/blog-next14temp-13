@@ -80,6 +80,10 @@ export default function Home({
 
   const popularBlogs = blog_list.filter((item) => item.isPopular);
 
+  const isfeatureexist = blog_list.some((item) => item.isFeatured);
+  const ispopularexist = blog_list.some((item) => item.isPopular);
+  const ismustreadexist = blog_list.some((item) => item.isMustRead);
+
   return (
     page?.enable && (
       <div className={`min-h-screen ${myFont.className}`}>
@@ -143,10 +147,11 @@ export default function Home({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full">
               <div className="col-span-1 md:col-span-2 flex flex-col gap-10">
                 {/* Featured Post Section */}
-                <div>
-                  <div className="mb-8 w-full relative">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-                      Featured Posts
+                {isfeatureexist && (
+                  <div>
+                    <div className="mb-8 w-full relative">
+                      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                        Featured Posts
                     </h2>
                     <div className="w-20 h-1 bg-rose-600 mb-6"></div>
                     <p className="mt-4 text-gray-600 max-w-2xl mb-8">
@@ -265,8 +270,10 @@ export default function Home({
                     )}
                   </div>
                 </div>
+                )}
 
                 {/* Popular Posts Section */}
+                {ispopularexist && (
                 <div>
                   <div className="mb-10 mt-10 w-full">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
@@ -395,8 +402,10 @@ export default function Home({
                     ))}
                   </div>
                 </div>
+                )}
 
                 {/* Must Read Section */}
+                {ismustreadexist && (
                 <div>
                   <div className="mb-10 w-full">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
@@ -523,6 +532,7 @@ export default function Home({
                       ))}
                   </div>
                 </div>
+                )}
               </div>
 
               {/* Sidebar */}
