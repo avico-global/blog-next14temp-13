@@ -65,8 +65,8 @@ export default function Blog({
           <meta charSet="UTF-8" />
           <title>{myblog?.value?.meta_title}</title>
           <meta name="description" content={myblog?.value?.meta_description} />
-          <link rel="author" href={`https://www.${domain}`} />
-          <link rel="canonical" href={`https://www.${domain}/${blog}`} />
+          <link rel="author" href={`https://${domain}`} />
+          <link rel="canonical" href={`https://${domain}/${blog}`} />
           <meta name="theme-color" content="#008DE5" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta

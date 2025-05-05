@@ -115,7 +115,7 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
     <>
       <FullContainer
         className={`
-          fixed top-0 w-full z-20 transition-all duration-300
+          fixed top-0 w-full z-50 transition-all duration-300
           ${isScrolled ? "shadow-md" : ""}
           ${
             isInBannerArea
