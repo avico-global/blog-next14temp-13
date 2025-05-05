@@ -52,7 +52,7 @@ export default function About({
           <meta name="description" content={meta?.description} />
           <link rel="author" href={`https://${domain}`} />
           <link rel="publisher" href={`https://${domain}`} />
-          <link rel="canonical" href={`https://${domain}/about`} />
+          <link rel="canonical" href={`https://${domain}/about-us`} />
           {/* <meta name="robots" content="noindex" /> */}
           <meta name="theme-color" content="#008DE5" />
           <link rel="manifest" href="/manifest.json" />
