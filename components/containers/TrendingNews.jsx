@@ -2,12 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { sanitizeUrl } from "@/lib/myFun";
+import Container from "../common/Container";
+import FullContainer from "../common/FullContainer";
 
 export default function TrendingNews({ blog_list = [], imagePath }) {
   const trendingBlogs = blog_list.filter((item) => item.trendingNews);
 
   return (
-    <section className="py-12 bg-gray-50">
+    <FullContainer className="py-12 bg-gray-50">
+    <Container className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="mb-10 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
@@ -19,7 +22,6 @@ export default function TrendingNews({ blog_list = [], imagePath }) {
             industry
           </p>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Featured Article (Larger) */}
           {trendingBlogs.length > 0 && (
@@ -109,6 +111,7 @@ export default function TrendingNews({ blog_list = [], imagePath }) {
           ))}
         </div>
       </div>
-    </section>
+    </Container>
+    </FullContainer>
   );
 }
