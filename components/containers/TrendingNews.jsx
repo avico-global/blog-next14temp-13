@@ -11,7 +11,7 @@ export default function TrendingNews({ blog_list = [], imagePath }) {
   return (
     <FullContainer className="py-12 bg-gray-50">
     <Container className="py-12 bg-gray-50">
-      <div className="container mx-auto px-4">
+      <div className="">
         <div className="mb-10 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
             Trending News
