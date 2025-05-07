@@ -105,10 +105,6 @@ export default function Terms({
 <FullContainer className="bg-gray-100">
           <div className="  text-start  w-full py-14 mb-8   " >
           <div  className=" mx-auto max-w-[1200px] " >
-
-            <h1 className="text-4xl font-semibold capitalize pb-8 pt-5 w-full">
-              Terms & Conditions
-            </h1>
             <Breadcrumbs
             className=" gap-2  "
               breadcrumbs={breadcrumbs}
