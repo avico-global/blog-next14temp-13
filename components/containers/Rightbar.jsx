@@ -66,7 +66,7 @@ export default function Rightbar({
           <Link
             key={index}
             title={item?.title}
-            href={`/${encodeURI(sanitizeUrl(item?.title))}`}
+            href={`/category/${encodeURI(sanitizeUrl(item?.title))}`}
             className={cn(
               "text-gray-500 capitalize w-full flex items-center gap-2 hover:text-primary transition-all p-2 border-b-2 border-gray-100 hover:border-primary",
               (category === item?.title || isActive(`/${item?.title}`)) &&
