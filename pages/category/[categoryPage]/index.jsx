@@ -84,9 +84,9 @@ export default function Categories({
               categoryPage?.replaceAll("-", " ")
             )}
           />
-          <link rel="author" href={`http://${domain}`} />
-          <link rel="publisher" href={`http://${domain}`} />
-          <link rel="canonical" href={`http://${domain}`} />
+          <link rel="author" href={`https://${domain}`} />
+          <link rel="publisher" href={`https://${domain}`} />
+          <link rel="canonical" href={`https://${domain}/category/${categoryPage}`} />
           <meta name="theme-color" content="#008DE5" />
           <GoogleTagManager />
         </Head>
