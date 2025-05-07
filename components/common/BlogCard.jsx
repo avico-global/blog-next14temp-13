@@ -30,7 +30,7 @@ const BlogCard = ({
           loading="lazy"
           alt={altImage}
           priority={false}
-          title={imageTitle}
+          title={imageTitle || "Article Thumbnail"}
           height={parseInt(imageHeight, 10) || 420}
           className="w-full h-full object-cover absolute top-0 hover:scale-125 transition-all"
         />

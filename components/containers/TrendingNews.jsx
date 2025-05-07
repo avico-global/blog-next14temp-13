@@ -37,6 +37,7 @@ export default function TrendingNews({ blog_list = [], imagePath }) {
                       trendingBlogs[0].image || "no-image.png"
                     }`}
                     alt={trendingBlogs[0].imageAltText}
+                    title={trendingBlogs[0].image || "Article Thumbnail"}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     priority
@@ -81,6 +82,7 @@ export default function TrendingNews({ blog_list = [], imagePath }) {
                href={`/${sanitizeUrl(blog?.title)}`}>
                 <div className="relative h-48 w-full">
                   <Image
+                    title={blog.image || "Article Thumbnail"}
                     src={`${imagePath}/${blog.image || "no-image.png"}`}
                     alt={blog.imageAltText}
                     layout="fill"

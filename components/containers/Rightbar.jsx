@@ -35,7 +35,7 @@ export default function Rightbar({
         <div className="relative h-[300px] overflow-hidden p-10 ">
           <Image
             src={`${imagePath}/${about_me?.file_name}`}
-            title={`${content.slice(0, 100)}...`}
+            title={`${content.slice(0, 100)}...` || "About Image"}
             alt={`${content.slice(0, 100)}...`}
             priority
             width={500}

@@ -22,6 +22,7 @@ export default function Blog({
       >
         <div className="relative overflow-hidden w-full h-[60vh] mt-8">
           <Image
+            title={image || "Blog Image"}
             src={image}
             fill={true}
             quality={80}
