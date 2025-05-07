@@ -19,7 +19,7 @@ export default function Footer({ logo, imagePath }) {
           <Logo logo={logo} imagePath={imagePath} />
 
           {/* Social Icons */}
-          <div className="flex items-center gap-4 my-8">
+          {/* <div className="flex items-center gap-4 my-8">
             {[Facebook, Twitter, Youtube, Instagram].map((Icon, index) => (
               <a
                 key={index}
@@ -30,10 +30,10 @@ export default function Footer({ logo, imagePath }) {
                 <Icon size={20} />
               </a>
             ))}
-          </div>
+          </div> */}
 
           {/* Navigation Links */}
-          <nav className="flex flex-wrap justify-center gap-6 w-full max-w-3xl">
+          <nav className="flex flex-wrap justify-center gap-6 w-full max-w-3xl pt-8">
             {[
               { title: "Home", href: "/" },
               { title: "About", href: "/about-us" },
