@@ -57,17 +57,20 @@ export default function Contact({
             content="zbriSQArMtpCR3s5simGqO5aZTDqEZZi9qwinSrsRPk"
           />
           <link
+            title={favicon || "Favicon"}
             rel="apple-touch-icon"
             sizes="180x180"
             href={`${imagePath}/${favicon}`}
           />
           <link
+            title={favicon || "Favicon"}
             rel="icon"
             type="image/png"
             sizes="32x32"
             href={`${imagePath}/${favicon}`}
           />
-          <link
+            <link
+            title={favicon || "Favicon"}
             rel="icon"
             type="image/png"
             sizes="16x16"

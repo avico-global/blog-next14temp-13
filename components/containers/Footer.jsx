@@ -45,7 +45,7 @@ export default function Footer({ logo, imagePath }) {
               <Link
                 key={link.title}
                 href={link.href}
-                title={link.title}
+                title={link.title || "Footer Link"}
                 onClick={link.onClick}
                 className="text-sm uppercase hover:text-primary transition-colors duration-300"
               >

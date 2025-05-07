@@ -65,7 +65,7 @@ export default function Rightbar({
         {categories.map((item, index) => (
           <Link
             key={index}
-            title={item?.title}
+            title={item?.title || "Category"}
             href={`/category/${encodeURI(sanitizeUrl(item?.title))}`}
             className={cn(
               "text-gray-500 capitalize w-full flex items-center gap-2 hover:text-primary transition-all p-2 border-b-2 border-gray-100 hover:border-primary",
@@ -89,6 +89,7 @@ export default function Rightbar({
       <div className="flex flex-col mt-6 gap-4 w-full">
         {lastFourBlogs.map((item, index) => (
           <Link
+            title={item.title || "Article Link"}
             key={index}
             href={`${sanitizeUrl(
               item?.title

@@ -16,6 +16,7 @@ const Custom404 = () => {
         }
       </p>
       <Link
+        title="error page"
         href="/"
         className="inline-block px-6 py-3 bg-red-500 text-white rounded-full font-bold text-lg hover:bg-red-600 transition duration-300"
       >

@@ -38,6 +38,7 @@ export default function Banner({ image, data, blog_list }) {
             <div className="pt-4 flex flex-wrap gap-4">
               {data?.cta && (
                 <Link
+                  title={data.cta || "CTA"}
                   href={data.ctaLink || "#"}
                   className="px-6 py-3 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-all duration-300 shadow-lg hover:shadow-rose-200/50 font-medium flex items-center group"
                 >
@@ -61,6 +62,7 @@ export default function Banner({ image, data, blog_list }) {
 
               {data?.secondaryCta && (
                 <Link
+                  title={data.secondaryCta || "Secondary CTA"}
                   href={data.secondaryCtaLink || "#"}
                   className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all duration-300 font-medium"
                 >
@@ -142,6 +144,7 @@ export default function Banner({ image, data, blog_list }) {
 function BlogCard({ title, href, index, category }) {
   return (
     <Link
+      title={title || "Blog Card"}
       href={href || "#"}
       className="group block bg-white rounded-xl overflow-hidden border border-gray-100 shadow hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
       style={{ animationDelay: `${index * 150}ms` }}

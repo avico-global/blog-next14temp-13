@@ -71,17 +71,20 @@ export default function PriavcyPolicy({
             content="zbriSQArMtpCR3s5simGqO5aZTDqEZZi9qwinSrsRPk"
           />
           <link
+            title={favicon || "Favicon"}
             rel="apple-touch-icon"
             sizes="180x180"
             href={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/${imagePath}/${favicon}`}
           />
-          <link
+            <link
+            title={favicon || "Favicon"}
             rel="icon"
             type="image/png"
             sizes="32x32"
             href={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/${imagePath}/${favicon}`}
           />
           <link
+            title={favicon || "Favicon"}
             rel="icon"
             type="image/png"
             sizes="16x16"

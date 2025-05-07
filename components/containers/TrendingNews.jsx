@@ -27,6 +27,7 @@ export default function TrendingNews({ blog_list = [], imagePath }) {
           {trendingBlogs.length > 0 && (
             <div className="lg:col-span-2 lg:row-span-2 rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:-translate-y-1 h-full">
               <Link
+                title={trendingBlogs[0]?.title || "Article Link"}
                 href={`/${sanitizeUrl(trendingBlogs[0]?.title)}`}
                 className="block h-full"
               >
@@ -75,7 +76,9 @@ export default function TrendingNews({ blog_list = [], imagePath }) {
               key={blog._id}
               className="rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:-translate-y-1"
             >
-              <Link href={`/${sanitizeUrl(blog?.title)}`}>
+              <Link
+                title={blog?.title || "Article Link"}
+               href={`/${sanitizeUrl(blog?.title)}`}>
                 <div className="relative h-48 w-full">
                   <Image
                     src={`${imagePath}/${blog.image || "no-image.png"}`}

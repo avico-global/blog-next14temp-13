@@ -45,7 +45,11 @@ const BlogCard = ({
       </div>
       <p className="mt-3 text-xs md:hidden">{content.slice(0, 100)}</p>
       <p className="mt-3 text-sm hidden md:block">{content}</p>
-      <Link href={href || ""} className="mt-3">
+      <Link
+        href={href || ""}
+        title={title || "Article Link"}
+        className="mt-3"
+      >
         <Button className="rounded-full">Read Article</Button>
       </Link>
     </div>

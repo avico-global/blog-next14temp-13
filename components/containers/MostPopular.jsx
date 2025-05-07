@@ -44,7 +44,7 @@ function BlogCard({
     <div className="grid grid-cols-bblog gap-5">
       <Link
         href={href || "#"}
-        title={imageTitle}
+        title={imageTitle || "Article Thumbnail"}
         className="relative overflow-hidden w-full h-28"
       >
         <Image
@@ -62,7 +62,7 @@ function BlogCard({
       </Link>
 
       <div className="flex flex-col justify-center">
-        <Link href={href || ""}>
+        <Link title={title || "Article Link"} href={href || ""}>
           <p className="">{title}</p>
         </Link>
         <p>{date}</p>

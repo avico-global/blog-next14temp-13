@@ -181,10 +181,11 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
 
                       {categories.map((category, index) => (
                         <Link
+                       
                           key={index}
                           href={`/category/${sanitizeUrl(category.title)}`}
                           className="group relative overflow-hidden rounded-xl hover:shadow-md transition-all duration-300"
-                          title={category.title}
+                          title={category.title || "Category"}
                         >
                           <div
                             className="relative flex items-center gap-4 p-4 hover:bg-primary/5 transition-all duration-300

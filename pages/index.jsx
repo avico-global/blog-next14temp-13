@@ -107,17 +107,20 @@ export default function Home({
             content="zbriSQArMtpCR3s5simGqO5aZTDqEZZi9qwinSrsRPk"
           />
           <link
+            title={favicon || "Favicon"}
             rel="apple-touch-icon"
             sizes="180x180"
             href={`${imagePath}/${favicon}`}
           />
           <link
+            title={favicon || "Favicon"}
             rel="icon"
             type="image/png"
             sizes="32x32"
             href={`${imagePath}/${favicon}`}
           />
           <link
+            title={favicon || "Favicon"}
             rel="icon"
             type="image/png"
             sizes="16x16"
@@ -178,7 +181,7 @@ export default function Home({
                               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-10"></div>
                               <Link
                                 href={`/${encodeURI(sanitizeUrl(item.title))}`}
-                                title={item.title}
+                                title={item.title || "Article Link"}
                                 className="relative block w-full h-full"
                               >
                                 <Image
@@ -214,7 +217,7 @@ export default function Home({
                                   href={`/${encodeURI(
                                     sanitizeUrl(item.title)
                                   )}`}
-                                  title={item.title}
+                                  title={item.title || "Article Link"}
                                   className="font-bold text-3xl hover:text-primary/90 transition-colors duration-200 mb-4 block"
                                 >
                                   {item.title}
@@ -241,6 +244,7 @@ export default function Home({
                                   </div>
 
                                   <Link
+                                    title={item.title || "Link"}
                                     href={`/${encodeURI(
                                       sanitizeUrl(item.title)
                                     )}`}
@@ -298,6 +302,7 @@ export default function Home({
                             Popular
                           </span>
                           <Link
+                          title={item.title || "Article Link"}
                             href={`/${encodeURI(sanitizeUrl(item.title))}`}
                             className="block h-full"
                           >
@@ -353,7 +358,7 @@ export default function Home({
 
                           <Link
                             href={`/${encodeURI(sanitizeUrl(item.title))}`}
-                            title={item.title}
+                            title={item.title || "Article Link"}
                             className="text-2xl font-bold hover:text-primary duration-200 mb-3 line-clamp-2"
                           >
                             {item.title}
@@ -431,7 +436,7 @@ export default function Home({
                           <div className="relative">
                             <Link
                               href={`/${encodeURI(sanitizeUrl(item.title))}`}
-                              title={item.title}
+                              title={item.title || "Article Link"}
                               className="block relative h-56 overflow-hidden"
                             >
                               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10"></div>
@@ -475,7 +480,7 @@ export default function Home({
                           <div className="p-6 flex-grow flex flex-col">
                             <Link
                               href={`/${encodeURI(sanitizeUrl(item.title))}`}
-                              title={item.title}
+                              title={item.title || "Article Link"}
                               className="block text-xl font-bold hover:text-primary duration-200 mb-3 line-clamp-2"
                             >
                               {item.title}
@@ -507,6 +512,7 @@ export default function Home({
                               </div>
 
                               <Link
+                                title={item.title || "Article Link"}
                                 href={`/${encodeURI(sanitizeUrl(item.title))}`}
                                 className="text-primary font-medium text-sm hover:underline inline-flex items-center"
                               >
