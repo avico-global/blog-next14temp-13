@@ -3,7 +3,7 @@ import Logo from "./Logo";
 import Link from "next/link";
 import Image from "next/image";
 import { sanitizeUrl } from "@/lib/myFun";
-import { Search, X } from "lucide-react";
+import { Search, X, Menu } from "lucide-react";
 import Container from "@/components/common/Container";
 import FullContainer from "@/components/common/FullContainer";
 
@@ -246,6 +246,15 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
                   About Us
                 </Link>
               </nav>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setSidebar(true)}
+                className="lg:hidden p-2 hover:text-primary transition-all duration-300"
+                aria-label="Open menu"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
 
               {/* Search Section */}
               <div className="flex items-center justify-end gap-3 relative search-container">
