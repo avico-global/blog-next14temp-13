@@ -94,7 +94,7 @@ export default function About({
           blog_list={blog_list}
           categories={categories}
         />
-        <FullContainer className="bg-gray-100">
+        <FullContainer className="bg-gray-100 px-4 lg:px-8">
           <div className="  text-start  w-full py-14 mb-8   " >
           <div  className=" mx-auto max-w-[1200px] " >
 

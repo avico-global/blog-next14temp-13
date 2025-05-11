@@ -69,7 +69,7 @@ export default function Contact({
             sizes="32x32"
             href={`${imagePath}/${favicon}`}
           />
-            <link
+          <link
             title={favicon || "Favicon"}
             rel="icon"
             type="image/png"
@@ -87,21 +87,15 @@ export default function Contact({
           contact_details={contact_details}
         />
 
-<FullContainer className="bg-gray-100">
-          <div className="  text-start  w-full py-14 mb-8   " >
-          <div  className=" mx-auto max-w-[1200px] " >
-
-            <h1 className="text-4xl font-semibold capitalize pb-8 pt-5 w-full">
-              Contact Us
-            </h1>
-            <Breadcrumbs
-            className=" gap-2  "
-              breadcrumbs={breadcrumbs}
-            />
-          </div>
-
-            
+        <FullContainer className="bg-gray-100 px-4 lg:px-8">
+          <div className="  text-start  w-full py-14 mb-8   ">
+            <div className=" mx-auto max-w-[1200px] ">
+              <h1 className="text-4xl font-semibold capitalize pb-8 pt-5 w-full">
+                Contact Us
+              </h1>
+              <Breadcrumbs className=" gap-2  " breadcrumbs={breadcrumbs} />
             </div>
+          </div>
         </FullContainer>
 
         <div className=" mx-auto max-w-[1200px]  pt-6 pb-10 px-4 sm:px-6 lg:px-8 bg-gray-50">

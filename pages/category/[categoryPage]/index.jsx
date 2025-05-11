@@ -101,8 +101,8 @@ export default function Categories({
           contact_details={contact_details}
         />
 
-        <FullContainer className="py-10 mb-10  ">
-          <div className="  text-start bg-gray-100 w-full py-14 mb-8   ">
+        <FullContainer className="py-10 mb-10">
+          <div className="  text-start bg-gray-100 w-full py-14 mb-8 px-4 lg:px-8  ">
             <div className=" mx-auto max-w-[1200px] ">
               <h1 className="text-4xl font-semibold capitalize pb-8 pt-5 w-full">
                 Exploring: {categoryPage?.replace("-", " ")}

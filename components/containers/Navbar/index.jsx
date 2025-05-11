@@ -6,8 +6,8 @@ import { sanitizeUrl } from "@/lib/myFun";
 import { Search, X, Menu } from "lucide-react";
 import Container from "@/components/common/Container";
 import FullContainer from "@/components/common/FullContainer";
-
-export default function Navbar({ logo, categories, imagePath, blog_list }) {
+import { useRouter } from "next/router";
+export default function Navbar({ logo, categories, imagePath, blog_list, }) {
   const sidebarRef = useRef(null);
   const searchInputRef = useRef(null);
   const [sidebar, setSidebar] = useState(false);
@@ -17,6 +17,7 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isInBannerArea, setIsInBannerArea] = useState(true);
+  const router = useRouter(); 
 
   const lastThreeBlogs = blog_list.slice(-3);
 
@@ -74,7 +75,7 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isSearchOpen]);
+  }, [isSearchOpen, router]);
 
   // Debounce search query
   const debounceSearch = useCallback(() => {
@@ -350,7 +351,16 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
           />
         </div>
 
-        <div className="pt-32 hidden lg:flex flex-col items-center p-2">
+     
+
+        <SidebarLinks
+          categories={categories}
+          isDropdownOpen={isDropdownOpen}
+          toggleDropdown={toggleDropdown}
+          sanitizeUrl={sanitizeUrl}
+          imagePath={imagePath}
+        />
+           <div className="pt-32 flex flex-col items-center p-2">
           {lastThreeBlogs.map((item, index) => (
             <SidebarBlogItem
               key={index}
@@ -360,14 +370,6 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
             />
           ))}
         </div>
-
-        <SidebarLinks
-          categories={categories}
-          isDropdownOpen={isDropdownOpen}
-          toggleDropdown={toggleDropdown}
-          sanitizeUrl={sanitizeUrl}
-          imagePath={imagePath}
-        />
       </div>
 
       {/* Sidebar Styles */}
@@ -406,7 +408,7 @@ export default function Navbar({ logo, categories, imagePath, blog_list }) {
 const SidebarBlogItem = ({ blog, imagePath, sanitizeUrl }) => (
   <div className="grid grid-cols-widget1 gap-4 py-3 border-b last:border-none">
     <Link
-      href={`/${sanitizeUrl(blog.article_category)}/${sanitizeUrl(blog.title)}`}
+      href={`/${sanitizeUrl(blog.title)}`}
       title={blog.title}
       className="relative overflow-hidden"
     >
@@ -420,7 +422,7 @@ const SidebarBlogItem = ({ blog, imagePath, sanitizeUrl }) => (
       />
     </Link>
     <Link
-      href={`/${sanitizeUrl(blog.article_category)}/${sanitizeUrl(blog.title)}`}
+      href={`/${sanitizeUrl(blog.title)}`}
       title={blog.title}
     >
       <p className="font-semibold leading-tight">{blog.title}</p>
@@ -511,10 +513,10 @@ const SidebarLinks = ({
       )}
     </div>
 
-    <Link href="/contact" title="Contact">
+    <Link href="/contact-us" title="Contact">
       Contact Us
     </Link>
-    <Link href="/about" title="About">
+    <Link href="/about-us" title="About">
       About Us
     </Link>
   </div>

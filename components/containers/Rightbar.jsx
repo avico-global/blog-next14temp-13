@@ -28,7 +28,7 @@ export default function Rightbar({
   const renderAbout = () => (
     <Link
       title="About"
-      href="/about"
+      href="/about-us"
       className="flex flex-col items-center text-center bg-white shadow-md group overflow-hidden"
     >
       <div className="relative w-full">
@@ -91,7 +91,7 @@ export default function Rightbar({
           <Link
             title={item.title || "Article Link"}
             key={index}
-            href={`${sanitizeUrl(
+            href={`/${sanitizeUrl(
               item?.title
             )}`}
             className="flex items-center gap-4 group p-2 transition-all"
