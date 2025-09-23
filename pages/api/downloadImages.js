@@ -27,9 +27,6 @@ export default async function handler(req, res) {
 
           // Check if the file already exists
           if (fs.existsSync(filePath)) {
-            console.log(
-              `Image already exists: ${fileName}, skipping download.`
-            );
             continue; // Skip to the next image if this one already exists
           }
 
@@ -42,7 +39,6 @@ export default async function handler(req, res) {
 
           const buffer = await response.arrayBuffer();
           fs.writeFileSync(filePath, Buffer.from(buffer));
-          console.log(`Image downloaded and saved: ${fileName}`);
         } catch (err) {
           console.error(`Error saving image ${url}:`, err);
         }
